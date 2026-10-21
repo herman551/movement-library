@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/herman551/movement-library/schema/movement.schema.json",
+  "title": "Movement",
+  "description": "One resistance-training movement, described in the fields a program actually computes with. Facts only: no instructional prose copied from anywhere, no images.",
+  "type": "object",
+  "required": ["id", "name", "pattern", "loadType", "mechanic", "primaryMuscle"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Stable slug, derived from the canonical name at first publication. Never re-used, never changed — a renamed movement keeps its id and gains an alias."
+    },
+    "name": {
+      "type": "string",
+      "description": "The canonical gym name, equipment first where equipment distinguishes it ('Cable Lateral Raise', not 'Lateral Raise, Cable')."
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other names the same movement answers to. These are what let an app resolve a coach's or athlete's wording to one record instead of forking a second."
+    },
+    "pattern": {
+      "type": "string",
+      "enum": ["squat", "hinge", "lunge", "horizontalPush", "verticalPush", "horizontalPull", "verticalPull", "carryCore", "none"],
+      "description": "Movement pattern. 'none' for isolation work that belongs to no pattern (curls, raises, extensions)."
+    },
+    "loadType": {
+      "type": "string",
+      "enum": ["barbell", "dumbbell", "kettlebell", "machine", "cable", "landmine", "bodyweight", "band", "sled", "other"],
+      "description": "How it is loaded. Drives plate maths, rounding and what a room can actually do."
+    },
+    "mechanic": {
+      "type": "string",
+      "enum": ["compound", "isolation"],
+      "description": "Multi-joint or single-joint. Absent from every other open dataset we found."
+    },
+    "force": {
+      "type": "string",
+      "enum": ["push", "pull", "static"],
+      "description": "Direction of the working effort."
+    },
+    "primaryMuscle": {
+      "type": "string",
+      "description": "The muscle the movement is for, in common anatomical English ('Latissimus Dorsi', 'Gluteus Maximus')."
+    },
+    "secondaryMuscles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Every muscle doing meaningful work besides the primary. A recovery model credits these at a fraction of the primary, so an empty list under-counts training."
+    },
+    "unilateral": {
+      "type": "boolean",
+      "description": "Trained one side at a time, so a prescribed load is per side and reps are per side."
+    },
+    "strengthTracked": {
+      "type": "boolean",
+      "description": "Whether an estimated one-rep max is meaningful for it. False for most isolation, carries, holds and jumps."
+    },
+    "transfers": {
+      "type": "array",
+      "description": "Like lifts whose strength carries over, closest relative first. This is what lets an app open an unfamiliar movement at a sensible weight instead of guessing.",
+      "items": {
+        "type": "object",
+        "required": ["reference", "ratio"],
+        "additionalProperties": false,
+        "properties": {
+          "reference": { "type": "string", "description": "The canonical name of a more common movement." },
+          "ratio": { "type": "number", "exclusiveMinimum": 0, "maximum": 3, "description": "this movement ≈ ratio × reference, at the same reps." },
+          "basis": { "type": "string", "enum": ["published", "practice"], "description": "Whether the ratio comes from published training standards or from well-established coaching practice." }
+        }
+      }
+    },
+    "equipmentNotes": {
+      "type": "string",
+      "description": "What a room needs beyond the load type ('a rack with safeties', 'a bench set to 30-45°'). Short, factual, no coaching."
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" },
+      "description": "What the research consulted when the record was authored. Provenance, not content: nothing here is quoted into the record."
+    },
+    "authored": {
+      "type": "string",
+      "format": "date",
+      "description": "When this record was generated."
+    },
+    "reviewed": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "When a human last checked it. Null means machine-authored and unreviewed — treat the ratios with more suspicion than the muscles."
+    }
+  }
+}

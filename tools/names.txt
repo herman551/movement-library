@@ -1,0 +1,449 @@
+# Seed names for the movement library.
+#
+# Written from general strength-training knowledge, grouped by what the movement DOES, not
+# copied from any library's index. Lines beginning with # are comments; blank lines ignored.
+# One canonical-ish name per line — the research pass settles the canonical form and records
+# the rest as aliases, so near-misses here are harmless.
+#
+# Keep this list honest: add a movement because people train it, not to inflate a count.
+
+# ---- Squat pattern: barbell
+Back Squat
+Front Squat
+High Bar Back Squat
+Low Bar Back Squat
+Box Squat
+Pause Squat
+Safety Bar Squat
+Zercher Squat
+Overhead Squat
+Anderson Squat
+Pin Squat
+Hatfield Squat
+
+# ---- Squat pattern: other loads
+Goblet Squat
+Dumbbell Squat
+Kettlebell Front Squat
+Double Kettlebell Front Squat
+Landmine Squat
+Hack Squat Machine
+Pendulum Squat
+V-Squat Machine
+Belt Squat
+Smith Machine Squat
+Leg Press
+Horizontal Leg Press
+Single-Leg Leg Press
+Sissy Squat
+Bodyweight Squat
+Prisoner Squat
+Wall Sit
+Jump Squat
+Dumbbell Jump Squat
+Box Jump
+Depth Jump
+Broad Jump
+Pogo Hop
+
+# ---- Hinge
+Conventional Deadlift
+Sumo Deadlift
+Romanian Deadlift
+Stiff-Legged Deadlift
+Deficit Deadlift
+Rack Pull
+Block Pull
+Trap Bar Deadlift
+Snatch-Grip Deadlift
+Dumbbell Romanian Deadlift
+Single-Leg Romanian Deadlift
+Kettlebell Romanian Deadlift
+Landmine Romanian Deadlift
+Good Morning
+Seated Good Morning
+Barbell Hip Thrust
+Single-Leg Hip Thrust
+Glute Bridge
+Barbell Glute Bridge
+Frog Pump
+Back Extension
+45-Degree Back Extension
+Reverse Hyperextension
+Nordic Hamstring Curl
+Kettlebell Swing
+Single-Arm Kettlebell Swing
+Dumbbell Swing
+Cable Pull-Through
+Jefferson Curl
+Hip Thrust Machine
+Glute Kickback Machine
+Cable Glute Kickback
+Standing Hip Abduction
+Seated Hip Abduction Machine
+Seated Hip Adduction Machine
+Copenhagen Plank
+
+# ---- Lunge and unilateral legs
+Forward Lunge
+Reverse Lunge
+Walking Lunge
+Dumbbell Lunge
+Barbell Lunge
+Deficit Reverse Lunge
+Curtsy Lunge
+Lateral Lunge
+Split Squat
+Bulgarian Split Squat
+Dumbbell Bulgarian Split Squat
+Front-Foot-Elevated Split Squat
+Step-Up
+Dumbbell Step-Up
+Lateral Step-Up
+Step-Down
+Pistol Squat
+Shrimp Squat
+Skater Squat
+Cossack Squat
+
+# ---- Horizontal push
+Barbell Bench Press
+Incline Barbell Bench Press
+Decline Barbell Bench Press
+Close-Grip Bench Press
+Pause Bench Press
+Floor Press
+Board Press
+Spoto Press
+Dumbbell Bench Press
+Incline Dumbbell Bench Press
+Decline Dumbbell Bench Press
+Dumbbell Floor Press
+Dumbbell Squeeze Press
+Neutral-Grip Dumbbell Press
+Smith Machine Bench Press
+Machine Chest Press
+Incline Machine Chest Press
+Hammer Strength Chest Press
+Cable Chest Press
+Single-Arm Cable Chest Press
+Push-Up
+Incline Push-Up
+Decline Push-Up
+Diamond Push-Up
+Wide-Grip Push-Up
+Archer Push-Up
+Ring Push-Up
+Deficit Push-Up
+Plyometric Push-Up
+Chest Dip
+Assisted Dip
+Ring Dip
+Landmine Chest Press
+
+# ---- Chest isolation
+Dumbbell Fly
+Incline Dumbbell Fly
+Cable Fly
+Low-to-High Cable Fly
+High-to-Low Cable Fly
+Cable Crossover
+Pec Deck
+Machine Fly
+Dumbbell Pullover
+Cable Pullover
+Svend Press
+
+# ---- Vertical push
+Overhead Press
+Seated Barbell Overhead Press
+Push Press
+Push Jerk
+Split Jerk
+Behind-the-Neck Press
+Z Press
+Dumbbell Shoulder Press
+Seated Dumbbell Shoulder Press
+Arnold Press
+Single-Arm Dumbbell Press
+Kettlebell Overhead Press
+Bottoms-Up Kettlebell Press
+Landmine Press
+Half-Kneeling Landmine Press
+Machine Shoulder Press
+Smith Machine Overhead Press
+Pike Push-Up
+Handstand Push-Up
+Cable Overhead Press
+
+# ---- Shoulder isolation
+Dumbbell Lateral Raise
+Cable Lateral Raise
+Machine Lateral Raise
+Leaning Lateral Raise
+Lu Raise
+Dumbbell Front Raise
+Plate Front Raise
+Cable Front Raise
+Rear Delt Fly
+Dumbbell Rear Delt Fly
+Cable Rear Delt Fly
+Machine Rear Delt Fly
+Face Pull
+Band Pull-Apart
+Upright Row
+Cable Upright Row
+Dumbbell Upright Row
+Scapular Push-Up
+Wall Slide
+Cuban Press
+Cable External Rotation
+Dumbbell External Rotation
+
+# ---- Vertical pull
+Pull-Up
+Chin-Up
+Neutral-Grip Pull-Up
+Wide-Grip Pull-Up
+Weighted Pull-Up
+Assisted Pull-Up
+Band-Assisted Pull-Up
+Scapular Pull-Up
+Lat Pulldown
+Wide-Grip Lat Pulldown
+Close-Grip Lat Pulldown
+Neutral-Grip Lat Pulldown
+Reverse-Grip Lat Pulldown
+Single-Arm Lat Pulldown
+Straight-Arm Pulldown
+Kneeling Cable Pulldown
+Machine Pulldown
+Dead Hang
+Active Hang
+
+# ---- Horizontal pull
+Barbell Row
+Pendlay Row
+Yates Row
+Dumbbell Row
+Single-Arm Dumbbell Row
+Chest-Supported Dumbbell Row
+Chest-Supported Machine Row
+Seal Row
+T-Bar Row
+Landmine Row
+Meadows Row
+Kettlebell Row
+Seated Cable Row
+Wide-Grip Seated Cable Row
+Single-Arm Cable Row
+Machine Row
+Hammer Strength Row
+Inverted Row
+Ring Row
+TRX Row
+Renegade Row
+Gorilla Row
+
+# ---- Back and trap accessories
+Barbell Shrug
+Dumbbell Shrug
+Trap Bar Shrug
+Cable Shrug
+Machine Shrug
+Farmer's Walk
+Single-Arm Farmer's Walk
+Suitcase Carry
+Overhead Carry
+Front Rack Carry
+Yoke Walk
+Sled Push
+Sled Drag
+Sled Row
+
+# ---- Biceps
+Barbell Curl
+EZ-Bar Curl
+Dumbbell Curl
+Alternating Dumbbell Curl
+Hammer Curl
+Cross-Body Hammer Curl
+Incline Dumbbell Curl
+Preacher Curl
+EZ-Bar Preacher Curl
+Machine Preacher Curl
+Spider Curl
+Concentration Curl
+Cable Curl
+Cable Hammer Curl
+Bayesian Cable Curl
+Reverse Curl
+Zottman Curl
+Drag Curl
+21s Curl
+
+# ---- Triceps
+Close-Grip Push-Up
+Triceps Pushdown
+Rope Triceps Pushdown
+Overhead Cable Triceps Extension
+Rope Overhead Triceps Extension
+Skullcrusher
+EZ-Bar Skullcrusher
+Dumbbell Skullcrusher
+JM Press
+Dumbbell Triceps Kickback
+Cable Triceps Kickback
+Bench Dip
+Machine Triceps Extension
+Tate Press
+
+# ---- Forearms and grip
+Barbell Wrist Curl
+Dumbbell Wrist Curl
+Reverse Wrist Curl
+Behind-the-Back Wrist Curl
+Plate Pinch
+Towel Hang
+Wrist Roller
+
+# ---- Quad, hamstring and calf isolation
+Leg Extension
+Single-Leg Leg Extension
+Lying Leg Curl
+Seated Leg Curl
+Standing Leg Curl
+Glute-Ham Raise
+Standing Calf Raise
+Seated Calf Raise
+Donkey Calf Raise
+Leg Press Calf Raise
+Single-Leg Calf Raise
+Tibialis Raise
+Toe Walk
+
+# ---- Trunk
+Plank
+Side Plank
+Long-Lever Plank
+RKC Plank
+Dead Bug
+Bird Dog
+Pallof Press
+Half-Kneeling Pallof Press
+Cable Woodchop
+Cable Lift
+Landmine Rotation
+Russian Twist
+Hanging Knee Raise
+Hanging Leg Raise
+Toes-to-Bar
+Captain's Chair Knee Raise
+Lying Leg Raise
+Reverse Crunch
+Crunch
+Cable Crunch
+Machine Crunch
+Decline Sit-Up
+V-Up
+Hollow Body Hold
+Ab Wheel Rollout
+Barbell Rollout
+Stir the Pot
+Side Bend
+Suitcase Deadlift
+Bear Crawl
+Hip Flexor March
+Dragon Flag
+
+# ---- Olympic and derivatives
+Power Clean
+Hang Clean
+Hang Power Clean
+Clean Pull
+Clean High Pull
+Power Snatch
+Hang Snatch
+Snatch Pull
+Muscle Snatch
+Overhead Squat Snatch Balance
+Thruster
+Clean and Jerk
+Dumbbell Snatch
+Kettlebell Snatch
+Kettlebell Clean
+Turkish Get-Up
+
+# ---- Jumps, throws and speed
+Countermovement Jump
+Squat Jump
+Tuck Jump
+Hurdle Hop
+Lateral Bound
+Single-Leg Bound
+Approach Jump
+Drop Landing
+Medicine Ball Slam
+Medicine Ball Chest Pass
+Rotational Medicine Ball Throw
+Overhead Medicine Ball Throw
+Band-Resisted Sprint
+Hill Sprint
+
+# ---- Machines common in commercial gyms
+Smith Machine Row
+Smith Machine Incline Press
+Assisted Chin-Up Machine
+Chest Fly Machine
+Shoulder Press Machine
+Seated Dip Machine
+Abdominal Crunch Machine
+Rotary Torso Machine
+Back Extension Machine
+Hip Abduction Machine
+Hip Adduction Machine
+Standing Calf Raise Machine
+Seated Calf Raise Machine
+Leg Curl Machine
+Leg Extension Machine
+Glute Drive Machine
+Iso-Lateral Row
+Iso-Lateral Shoulder Press
+Iso-Lateral Chest Press
+Pullover Machine
+
+# ---- Bands and suspension
+Band Face Pull
+Band Row
+Band Chest Press
+Band Lateral Raise
+Band Pull-Through
+Band Good Morning
+Banded Squat
+Monster Walk
+Lateral Band Walk
+TRX Push-Up
+TRX Fallout
+TRX Hamstring Curl
+TRX Pistol Squat
+
+# ---- Stability, mobility and warm-up staples
+90/90 Hip Switch
+World's Greatest Stretch
+Couch Stretch
+Thoracic Rotation
+Cat-Cow
+Glute Bridge March
+Clamshell
+Fire Hydrant
+Single-Leg Balance
+Single-Leg Stand with Eyes Closed
+Ankle Rocking
+Scapular Wall Slide
+Prone Y Raise
+Prone T Raise
+Prone W Raise
+Supine 90/90 Breathing
+McGill Curl-Up
+Short Foot Drill
+Toe Yoga
