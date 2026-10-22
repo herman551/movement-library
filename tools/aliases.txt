@@ -1,0 +1,21 @@
+# Seed names deliberately folded into another record rather than given one of their own.
+# The seed list was written fast and has genuine duplicates; forking two records for one
+# movement is how a catalogue ends up claiming a count it hasn't earned. Format:
+#   seed name  ->  canonical id
+Dumbbell Rear Delt Fly -> rear-delt-fly
+Single-Arm Dumbbell Row -> dumbbell-row
+Iso-Lateral Row -> hammer-strength-row
+Overhead Squat Snatch Balance -> snatch-balance
+Squat Jump -> jump-squat
+Scapular Wall Slide -> wall-slide
+Monster Walk -> lateral-band-walk
+Chest Fly Machine -> machine-fly
+Shoulder Press Machine -> machine-shoulder-press
+Abdominal Crunch Machine -> machine-crunch
+Hip Abduction Machine -> seated-hip-abduction-machine
+Hip Adduction Machine -> seated-hip-adduction-machine
+Standing Calf Raise Machine -> standing-calf-raise
+Seated Calf Raise Machine -> seated-calf-raise
+Leg Curl Machine -> lying-leg-curl
+Leg Extension Machine -> leg-extension
+Assisted Chin-Up Machine -> assisted-pull-up
