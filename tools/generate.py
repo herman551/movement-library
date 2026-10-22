@@ -63,6 +63,10 @@ State each of these explicitly in your summary:
    meaningful for it.
 8. What a room needs beyond the load type (a rack with safeties, a bench at 30-45°, rings).
 
+Describe THE MOVEMENT NAMED, not a more common relative of it. A box squat, a pause squat
+and a safety bar squat are each their own movement: say what is true of that one, and give
+its ratio against the common lift it is a variant of.
+
 Use web search to confirm. Describe facts about the movement. Do NOT write coaching
 instructions, cues, or step-by-step technique: this record carries facts, not prose.
 """
@@ -71,7 +75,8 @@ EXTRACT_SYSTEM = """\
 Turn this research summary into one JSON object matching the schema. Output only the JSON.
 
 secondaryMuscles: carry every muscle the summary names as doing meaningful work, MOST
-significant first, up to six. Each entry is ONE muscle from the allowed list — never a phrase
+significant first, up to six. Never empty for a loaded movement — if the summary is vague,
+name the muscles its description implies. Each entry is ONE muscle from the allowed list — never a phrase
 like "Trapezius and Rhomboids" or "deep spinal stabilizers". Map the summary's wording onto
 the closest allowed value and drop anything that has none. Leave the list empty only when the
 summary genuinely names no secondary work.
@@ -140,7 +145,7 @@ EXTRACT_SCHEMA = {
         "force": {"type": "string", "enum": ["push", "pull", "static"]},
         "primaryMuscle": {"type": "string", "enum": MUSCLES},
         "secondaryMuscles": {"type": "array", "items": {"type": "string", "enum": MUSCLES},
-                             "maxItems": 6},
+                             "minItems": 1, "maxItems": 6},
         "unilateral": {"type": "boolean"},
         "strengthTracked": {"type": "boolean"},
         "transfers": {
@@ -245,7 +250,7 @@ def slug(name: str) -> str:
 def research(key: str, name: str) -> tuple[str, list[str]]:
     reply = call(key, {
         "model": RESEARCH_MODEL,
-        "max_tokens": 2000,
+        "max_tokens": 4000,
         "system": RESEARCH_SYSTEM,
         "messages": [{"role": "user", "content": f"Movement: {name}"}],
         "tools": [{"type": "web_search_20260209", "name": "web_search", "max_uses": 3}],
@@ -328,7 +333,17 @@ def main() -> None:
             if failed >= 5 and authored == 0:
                 sys.exit("five failures and nothing authored — stopping before this costs more")
             continue
-        record["id"] = slug(record.get("name") or name)
+        # The seed name owns the record. A canonical name that denotes a DIFFERENT movement
+        # (Box Squat → "Back Squat") would collapse two movements into one and overwrite
+        # whatever was there; the model's name survives only as an alias.
+        returned = (record.get("name") or "").strip()
+        if slug(returned) != slug(name):
+            aliases = record.get("aliases") or []
+            if returned and slug(returned) not in {slug(a) for a in aliases}:
+                aliases.append(returned)
+            record["aliases"] = aliases
+            record["name"] = name
+        record["id"] = slug(name)
         record["sources"] = sources[:8]          # provenance, not a bibliography
         record["authored"] = time.strftime("%Y-%m-%d")
         record["reviewed"] = None
