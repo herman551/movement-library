@@ -1,0 +1,78 @@
+[
+  {
+    "name": "Front Squat",
+    "pattern": "squat",
+    "loadType": "barbell",
+    "mechanic": "compound",
+    "primaryMuscle": "Quadriceps",
+    "secondaryMuscles": [
+      "Gluteus Maximus",
+      "Adductors",
+      "Erector Spinae",
+      "Hamstrings",
+      "Rectus Abdominis",
+      "Upper Trapezius"
+    ],
+    "force": "push",
+    "unilateral": false,
+    "strengthTracked": true,
+    "transfers": [
+      {
+        "reference": "Back Squat",
+        "ratio": 0.825
+      }
+    ],
+    "aliases": [
+      "Clean-Grip Front Squat",
+      "Cross-Arm Front Squat",
+      "Rack Squat"
+    ],
+    "equipmentNotes": "Requires a squat/power rack with adjustable safety arms set near bottom-of-rep height for loading and bailout; stable non-slip platform flooring recommended. Elevated-heel weightlifting shoes and adequate wrist/shoulder mobility (or straps for cross-arm grip) are commonly used but not structurally required.",
+    "id": "front-squat",
+    "sources": [
+      "https://www.nasm.org/resource-center/exercise-library/dumbbell-front-squat",
+      "https://nielasher.com/blogs/strength-and-conditioning/the-front-squat",
+      "https://www.hevyapp.com/exercises/how-to-front-squat/",
+      "https://www.soletreadmills.com/blogs/news/front-squat-vs-back-squat-differences-benefits-muscles-worked",
+      "https://www.endomondo.com/exercise/front-squat",
+      "https://www.ritfitsports.com/blogs/article/how-to-do-a-front-squat",
+      "https://www.onnit.com/blogs/the-edge/front-squats-vs-back-squats-everything-you-need-to-know-for-building-muscle",
+      "https://gunsmithfitness.com/blogs/news/how-to-improve-your-front-squat"
+    ],
+    "authored": "2026-10-21",
+    "reviewed": null
+  },
+  {
+    "name": "Low Bar Back Squat",
+    "aliases": [
+      "Powerlifting Squat",
+      "Competition-Style Squat"
+    ],
+    "pattern": "squat",
+    "loadType": "barbell",
+    "mechanic": "compound",
+    "force": "push",
+    "primaryMuscle": "Gluteus Maximus",
+    "secondaryMuscles": [
+      "Quadriceps",
+      "Hamstrings",
+      "Adductors",
+      "Erector Spinae",
+      "Rhomboids",
+      "Grip"
+    ],
+    "id": "low-bar-back-squat",
+    "sources": [
+      "https://www.researchgate.net/publication/280498065_A_Comparison_of_Gluteus_Maximus_Biceps_Femoris_and_Vastus_Lateralis_EMG_Activity_in_the_Back_Squat_and_Barbell_Hip_Thrust_Exercises",
+      "https://www.researchgate.net/publication/317316691_A_Review_of_the_Biomechanical_Differences_Between_the_High-Bar_and_Low-Bar_Back-Squat",
+      "https://bretcontreras.com/wp-content/uploads/A-Comparison-of-Gluteus-Maximus-Biceps-Femoris-and-Vastus-Lateralis-Electromyographic-Activity-in-the-Back-Squat-and-Barbell-Hip-Thrust-Exercises-.pdf",
+      "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7739732/",
+      "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0354893",
+      "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7289144/",
+      "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10170533/",
+      "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11036218/"
+    ],
+    "authored": "2026-10-21",
+    "reviewed": null
+  }
+]

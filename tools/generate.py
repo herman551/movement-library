@@ -79,7 +79,10 @@ summary genuinely names no secondary work.
 transfers: every like-lift ratio the summary states, as "this movement is about RATIO times
 REFERENCE at the same reps". The reference must be one of the allowed lifts; if the summary
 compares against something not on that list, either express it against an allowed lift or
-leave it out. Do not invent a ratio the summary did not state.
+leave it out. When the movement is a VARIANT of an allowed lift (a low-bar squat of a back
+squat, an incline dumbbell press of a dumbbell bench press), give the ratio against that lift
+— that comparison is the one a reader most needs. Do not invent a ratio the summary did not
+state; if it states none, return an empty list.
 
 aliases: other names for THE SAME movement. Not a narrower variant that people train as its
 own exercise (a high-bar and a low-bar squat are variants, not aliases), and nothing generic
@@ -149,13 +152,15 @@ EXTRACT_SCHEMA = {
                     "ratio": {"type": "number"},
                     "basis": {"type": "string", "enum": ["published", "practice"]},
                 },
-                "required": ["reference", "ratio"],
+                "required": ["reference", "ratio", "basis"],
                 "additionalProperties": False,
             },
         },
         "equipmentNotes": {"type": "string"},
     },
-    "required": ["name", "pattern", "loadType", "mechanic", "primaryMuscle"],
+    "required": ["name", "aliases", "pattern", "loadType", "mechanic", "force",
+                 "primaryMuscle", "secondaryMuscles", "unilateral", "strengthTracked",
+                 "transfers"],
     "additionalProperties": False,
 }
 
@@ -176,7 +181,7 @@ def api_key() -> str:
                  f"(service {KEYCHAIN_SERVICE}, account {KEYCHAIN_ACCOUNT}).")
 
 
-def call(key: str, body: dict, retries: int = 3) -> dict:
+def call(key: str, body: dict, retries: int = 2, timeout: int = 180) -> dict:
     data = json.dumps(body).encode()
     request = urllib.request.Request(API, data=data, method="POST", headers={
         "content-type": "application/json",
@@ -185,7 +190,7 @@ def call(key: str, body: dict, retries: int = 3) -> dict:
     })
     for attempt in range(retries):
         try:
-            with urllib.request.urlopen(request, timeout=300) as response:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
                 return json.load(response)
         except urllib.error.HTTPError as error:
             if error.code in (429, 500, 502, 503, 529) and attempt < retries - 1:
@@ -193,10 +198,12 @@ def call(key: str, body: dict, retries: int = 3) -> dict:
                 continue
             raise SystemExit(f"HTTP {error.code}: {error.read()[:300].decode(errors='replace')}")
         except (urllib.error.URLError, TimeoutError):
+            # One slow name must not cost the run minutes: fail it, let the next run retry it
+            # (nothing is written for a failure, so it simply comes round again).
             if attempt < retries - 1:
-                time.sleep(2 ** attempt * 3)
+                time.sleep(2)
                 continue
-            raise
+            raise TimeoutError("no reply within the deadline")
     raise SystemExit("unreachable")
 
 
@@ -205,14 +212,25 @@ def text_of(reply: dict) -> str:
 
 
 def sources_of(reply: dict) -> list[str]:
-    """Whatever the research actually opened — provenance, not content."""
+    """Whatever the research actually opened — provenance, not content.
+
+    A FAILED search returns a dict ({"type": "web_search_tool_result_error", ...}) where
+    results are expected; iterating that yields its keys, and asking a string for .get is
+    the AttributeError that killed one name in the first five.
+    """
     urls: list[str] = []
     for block in reply.get("content", []):
-        if block.get("type") == "web_search_tool_result":
-            for item in block.get("content", []) or []:
-                url = item.get("url")
-                if url and url not in urls:
-                    urls.append(url)
+        if not isinstance(block, dict) or block.get("type") != "web_search_tool_result":
+            continue
+        results = block.get("content")
+        if not isinstance(results, list):
+            continue
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+            url = item.get("url")
+            if url and url not in urls:
+                urls.append(url)
     return urls
 
 
@@ -231,7 +249,7 @@ def research(key: str, name: str) -> tuple[str, list[str]]:
         "system": RESEARCH_SYSTEM,
         "messages": [{"role": "user", "content": f"Movement: {name}"}],
         "tools": [{"type": "web_search_20260209", "name": "web_search", "max_uses": 3}],
-    })
+    }, timeout=240)
     return text_of(reply), sources_of(reply)
 
 
@@ -244,7 +262,7 @@ def extract(key: str, findings: str) -> dict:
         "tools": [{"name": "record", "description": "The movement record.",
                    "input_schema": EXTRACT_SCHEMA}],
         "tool_choice": {"type": "tool", "name": "record"},
-    })
+    }, timeout=120)
     for block in reply.get("content", []):
         if block.get("type") == "tool_use":
             return block["input"]
