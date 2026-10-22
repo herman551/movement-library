@@ -196,7 +196,7 @@ def call(key: str, body: dict, retries: int = 2, timeout: int = 180) -> dict:
             if error.code in (429, 500, 502, 503, 529) and attempt < retries - 1:
                 time.sleep(2 ** attempt * 3)
                 continue
-            raise SystemExit(f"HTTP {error.code}: {error.read()[:300].decode(errors='replace')}")
+            raise RuntimeError(f"HTTP {error.code}: {error.read()[:200].decode(errors='replace')}")
         except (urllib.error.URLError, TimeoutError):
             # One slow name must not cost the run minutes: fail it, let the next run retry it
             # (nothing is written for a failure, so it simply comes round again).
@@ -250,7 +250,10 @@ def research(key: str, name: str) -> tuple[str, list[str]]:
         "messages": [{"role": "user", "content": f"Movement: {name}"}],
         "tools": [{"type": "web_search_20260209", "name": "web_search", "max_uses": 3}],
     }, timeout=240)
-    return text_of(reply), sources_of(reply)
+    findings = text_of(reply).strip()
+    if not findings:
+        raise ValueError("research returned no prose to extract from")
+    return findings, sources_of(reply)
 
 
 def extract(key: str, findings: str) -> dict:
@@ -319,8 +322,6 @@ def main() -> None:
         try:
             findings, sources = research(key, name)
             record = extract(key, findings)
-        except SystemExit:
-            raise
         except Exception as error:                      # one bad name must not end the run
             failed += 1
             print(f"  [{index}/{len(todo)}] {name}: FAILED ({type(error).__name__})")
