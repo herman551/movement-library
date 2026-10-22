@@ -70,11 +70,57 @@ instructions, cues, or step-by-step technique: this record carries facts, not pr
 EXTRACT_SYSTEM = """\
 Turn this research summary into one JSON object matching the schema. Output only the JSON.
 
-Carry EVERY secondary muscle the summary names into secondaryMuscles, and every like-lift
-ratio it states into transfers — those two are the fields that go missing. Leave them empty
-only when the summary genuinely names none. Do not invent a ratio the summary did not state.
+secondaryMuscles: carry every muscle the summary names as doing meaningful work, MOST
+significant first, up to six. Each entry is ONE muscle from the allowed list — never a phrase
+like "Trapezius and Rhomboids" or "deep spinal stabilizers". Map the summary's wording onto
+the closest allowed value and drop anything that has none. Leave the list empty only when the
+summary genuinely names no secondary work.
+
+transfers: every like-lift ratio the summary states, as "this movement is about RATIO times
+REFERENCE at the same reps". The reference must be one of the allowed lifts; if the summary
+compares against something not on that list, either express it against an allowed lift or
+leave it out. Do not invent a ratio the summary did not state.
+
+aliases: other names for THE SAME movement. Not a narrower variant that people train as its
+own exercise (a high-bar and a low-bar squat are variants, not aliases), and nothing generic
+like "the squat".
+
 Write no instructional prose: there is no field for it and none is wanted.
 """
+
+# A muscle is a VALUE, not a phrase. The first run produced "Quadratus Lumborum and deep
+# spinal stabilizers" and "Trapezius (upper/middle) and Rhomboids" — unusable by anything that
+# wants to add up a week's work per muscle. Closed vocabulary, atomic entries.
+MUSCLES = [
+    "Upper Trapezius", "Middle Trapezius", "Lower Trapezius", "Rhomboids",
+    "Latissimus Dorsi", "Teres Major", "Erector Spinae", "Quadratus Lumborum",
+    "Anterior Deltoid", "Lateral Deltoid", "Posterior Deltoid", "Rotator Cuff",
+    "Serratus Anterior", "Pectoralis Major", "Pectoralis Minor",
+    "Biceps Brachii", "Brachialis", "Brachioradialis", "Triceps Brachii",
+    "Forearm Flexors", "Forearm Extensors", "Grip",
+    "Rectus Abdominis", "Obliques", "Transverse Abdominis", "Hip Flexors",
+    "Gluteus Maximus", "Gluteus Medius", "Gluteus Minimus",
+    "Adductors", "Quadriceps", "Hamstrings",
+    "Gastrocnemius", "Soleus", "Tibialis Anterior", "Peroneals",
+    "Neck Flexors", "Neck Extensors",
+]
+
+# A transfer is only useful if its reference resolves to something. Free text gave
+# "Deadlift (conventional)", which matches nothing. Closed set of common, heavily documented
+# lifts — every one of them a seed name in names.txt.
+REFERENCE_LIFTS = [
+    "Back Squat", "Front Squat", "Leg Press", "Hack Squat Machine", "Bulgarian Split Squat",
+    "Conventional Deadlift", "Sumo Deadlift", "Trap Bar Deadlift", "Romanian Deadlift",
+    "Barbell Hip Thrust", "Kettlebell Swing",
+    "Barbell Bench Press", "Incline Barbell Bench Press", "Dumbbell Bench Press",
+    "Machine Chest Press", "Push-Up", "Chest Dip",
+    "Overhead Press", "Dumbbell Shoulder Press", "Machine Shoulder Press",
+    "Pull-Up", "Chin-Up", "Lat Pulldown",
+    "Barbell Row", "Dumbbell Row", "Seated Cable Row", "T-Bar Row",
+    "Barbell Curl", "Dumbbell Curl", "Triceps Pushdown", "Skullcrusher",
+    "Dumbbell Lateral Raise", "Leg Extension", "Lying Leg Curl", "Standing Calf Raise",
+    "Farmer's Walk", "Plank",
+]
 
 EXTRACT_SCHEMA = {
     "type": "object",
@@ -89,8 +135,9 @@ EXTRACT_SCHEMA = {
                                                 "sled", "other"]},
         "mechanic": {"type": "string", "enum": ["compound", "isolation"]},
         "force": {"type": "string", "enum": ["push", "pull", "static"]},
-        "primaryMuscle": {"type": "string"},
-        "secondaryMuscles": {"type": "array", "items": {"type": "string"}},
+        "primaryMuscle": {"type": "string", "enum": MUSCLES},
+        "secondaryMuscles": {"type": "array", "items": {"type": "string", "enum": MUSCLES},
+                             "maxItems": 6},
         "unilateral": {"type": "boolean"},
         "strengthTracked": {"type": "boolean"},
         "transfers": {
@@ -98,7 +145,7 @@ EXTRACT_SCHEMA = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "reference": {"type": "string"},
+                    "reference": {"type": "string", "enum": REFERENCE_LIFTS},
                     "ratio": {"type": "number"},
                     "basis": {"type": "string", "enum": ["published", "practice"]},
                 },
@@ -263,7 +310,7 @@ def main() -> None:
                 sys.exit("five failures and nothing authored — stopping before this costs more")
             continue
         record["id"] = slug(record.get("name") or name)
-        record["sources"] = sources
+        record["sources"] = sources[:8]          # provenance, not a bibliography
         record["authored"] = time.strftime("%Y-%m-%d")
         record["reviewed"] = None
         records[record["id"]] = record
