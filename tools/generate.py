@@ -19,6 +19,7 @@ export it yourself. Nothing here prints it, logs it, or writes it anywhere.
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import os
 import pathlib
@@ -247,18 +248,75 @@ def slug(name: str) -> str:
     return out.strip("-")
 
 
+def stream(key: str, body: dict, idle: int = 120, retries: int = 2) -> tuple[str, list[str]]:
+    """The research pass, STREAMED.
+
+    A research call runs for a minute or more while the model searches. Sent without
+    streaming, the connection sits silent and something between here and the API kills it:
+    the client then waits out its whole deadline for bytes that never arrive, which is the
+    only reason Back Squat — the most heavily documented lift in the list — timed out three
+    times in a row while obscure ones came back fine. (Coach learned this on its own research
+    job months ago; the lesson didn't travel with the code.)
+
+    With SSE the connection carries bytes the whole time, so the deadline below is an IDLE
+    limit, not a cap on how long the model may think.
+    """
+    body = dict(body, stream=True)
+    data = json.dumps(body).encode()
+    for attempt in range(retries):
+        text: list[str] = []
+        urls: list[str] = []
+        try:
+            request = urllib.request.Request(API, data=data, method="POST", headers={
+                "content-type": "application/json",
+                "anthropic-version": VERSION,
+                "x-api-key": key,
+                "accept": "text/event-stream",
+            })
+            with urllib.request.urlopen(request, timeout=idle) as response:
+                for raw in response:                      # each read resets the idle clock
+                    line = raw.decode("utf-8", "replace").strip()
+                    if not line.startswith("data:"):
+                        continue
+                    try:
+                        event = json.loads(line[5:].strip())
+                    except json.JSONDecodeError:
+                        continue
+                    kind = event.get("type")
+                    if kind == "content_block_delta":
+                        delta = event.get("delta") or {}
+                        if delta.get("type") == "text_delta":
+                            text.append(delta.get("text", ""))
+                    elif kind == "content_block_start":
+                        block = event.get("content_block") or {}
+                        if block.get("type") == "web_search_tool_result":
+                            results = block.get("content")
+                            if isinstance(results, list):
+                                for item in results:
+                                    if isinstance(item, dict) and item.get("url") not in (None, *urls):
+                                        urls.append(item["url"])
+                    elif kind == "error":
+                        raise RuntimeError(str(event.get("error"))[:200])
+            return "".join(text).strip(), urls
+        except (urllib.error.URLError, TimeoutError, http.client.HTTPException):
+            if attempt < retries - 1:
+                time.sleep(2)
+                continue
+            raise TimeoutError("no bytes from the research stream within the idle deadline")
+    raise SystemExit("unreachable")
+
+
 def research(key: str, name: str) -> tuple[str, list[str]]:
-    reply = call(key, {
+    findings, sources = stream(key, {
         "model": RESEARCH_MODEL,
         "max_tokens": 4000,
         "system": RESEARCH_SYSTEM,
         "messages": [{"role": "user", "content": f"Movement: {name}"}],
         "tools": [{"type": "web_search_20260209", "name": "web_search", "max_uses": 3}],
-    }, timeout=240)
-    findings = text_of(reply).strip()
+    })
     if not findings:
         raise ValueError("research returned no prose to extract from")
-    return findings, sources_of(reply)
+    return findings, sources
 
 
 def extract(key: str, findings: str) -> dict:
