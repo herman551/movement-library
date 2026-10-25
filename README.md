@@ -65,7 +65,7 @@ transfer ratios, equipment notes, and the sources the research consulted.
 
 ## How records are made
 
-383 records, one per movement that people actually train, covering 32 of the 38 muscles in
+391 records, one per movement that people actually train, covering all 38 muscles in
 the vocabulary. Every record cites the pages consulted when it was written. Nothing is
 copied from any of them: they are read, and the record is written from what they say plus
 general training knowledge.
@@ -85,7 +85,7 @@ the family at once puts its variants on one scale.
 muscles, a primary muscle repeated in the secondary list, a load type that contradicts the
 name, a compound lift claiming fewer than two secondary muscles, a ratio outside (0, 3], and
 a transfer pointing at anything that is not a reference lift. Run it over the whole file and
-it checks all 383.
+it checks all 391.
 
 `tools/aliases.txt` records the 16 names deliberately folded into another record rather than
 given one of their own. A seed list written quickly has real duplicates in it, and forking a

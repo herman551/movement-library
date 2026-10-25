@@ -758,6 +758,34 @@
     "reviewed": null
   },
   {
+    "id": "band-neck-extension",
+    "name": "Band Neck Extension",
+    "aliases": [
+      "Resistance Band Neck Extension",
+      "Banded Neck Extension"
+    ],
+    "pattern": "none",
+    "loadType": "band",
+    "mechanic": "isolation",
+    "force": "push",
+    "primaryMuscle": "Neck Extensors",
+    "secondaryMuscles": [
+      "Upper Trapezius"
+    ],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "A band anchored at eye level (or underfoot) and looped behind the head; move the head back from flexion into extension against the band.",
+    "sources": [
+      "https://www.surreyphysio.co.uk/top-5/top-5-exercise-band-exercises-for-your-neck/",
+      "https://livestrong.com/article/123801-neck-strengthening-exercises",
+      "https://uk.gymreapers.com/blogs/news/neck-exercises-with-bands",
+      "https://apps.dtic.mil/sti/trecms/pdf/AD1149927.pdf"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
     "id": "band-pull-apart",
     "name": "Band Pull-Apart",
     "aliases": [
@@ -8243,6 +8271,95 @@
     "reviewed": null
   },
   {
+    "id": "lying-plate-lateral-neck-flexion",
+    "name": "Lying Plate Lateral Neck Flexion",
+    "aliases": [
+      "Lying Weighted Lateral Neck Flexion",
+      "Weighted Side-Lying Neck Raise",
+      "Side-Lying Plate Neck Raise"
+    ],
+    "pattern": "none",
+    "loadType": "other",
+    "mechanic": "isolation",
+    "force": "pull",
+    "primaryMuscle": "Neck Flexors",
+    "secondaryMuscles": [
+      "Upper Trapezius",
+      "Neck Extensors"
+    ],
+    "unilateral": true,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "On one side on a bench, head off the end, a towel and plate on the upper side of the head; raise the head toward the shoulder, no shrug or turn, then switch sides.",
+    "sources": [
+      "https://fitnessvolt.com/lying-weighted-lateral-neck-flexion/",
+      "https://fitwill.app/exercise/4429/weighted-lying-side-neck-raise.md",
+      "https://fitwill.app/exercise/4430/weighted-side-lying-side-neck-raise.md",
+      "https://us.physitrack.com/home-exercise-video/neck-flexion-%2528side-lying%2529"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
+    "id": "lying-plate-neck-extension",
+    "name": "Lying Plate Neck Extension",
+    "aliases": [
+      "Lying Face-Down Plate Neck Resistance",
+      "Face Down Plate Neck Resistance",
+      "Prone Plate Neck Extension"
+    ],
+    "pattern": "none",
+    "loadType": "other",
+    "mechanic": "isolation",
+    "force": "push",
+    "primaryMuscle": "Neck Extensors",
+    "secondaryMuscles": [
+      "Upper Trapezius",
+      "Erector Spinae"
+    ],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "Face down on a bench, head off the end, a towel and plate on the back of the head held in place with both hands; raise the head into extension and lower under control.",
+    "sources": [
+      "https://www.strengthlog.com/lying-neck-extension/",
+      "https://exercise.com/exercises/lying-face-down-plate-neck-resistance",
+      "https://www.sportskeeda.com/health-and-fitness/7-best-exercises-have-strong-neck",
+      "https://doctoryessis.com/2013/01/01/neck-extensions/",
+      "https://fitbod.me/exercises/face-down-plate-neck-resistance"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
+    "id": "lying-plate-neck-flexion",
+    "name": "Lying Plate Neck Flexion",
+    "aliases": [
+      "Lying Neck Curl",
+      "Lying Face-Up Plate Neck Resistance",
+      "Weight Plate Lying Face Up Neck Resistance"
+    ],
+    "pattern": "none",
+    "loadType": "other",
+    "mechanic": "isolation",
+    "force": "pull",
+    "primaryMuscle": "Neck Flexors",
+    "secondaryMuscles": [],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "Face up on a flat bench, head just off the end, a folded towel on the forehead and a plate held over it; tuck the chin and curl the head up without lifting the shoulders.",
+    "sources": [
+      "https://www.strengthlog.com/?p=31639",
+      "https://bodybuilding.com/exercises/lying-face-up-plate-neck-resistance",
+      "https://www.jefit.com/exercises/425/Weight-Plate-Lying-Face-Up-Neck-Resistance",
+      "https://www.exercise.com/exercises/lying-face-up-plate-neck-resistance/",
+      "https://dmoose.com/blogs/neck/neck-flexion"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
     "id": "machine-chest-press",
     "name": "Machine Chest Press",
     "aliases": [
@@ -8851,6 +8968,120 @@
       "https://www.strengthlog.com/?p=33148"
     ],
     "authored": "2026-10-22",
+    "reviewed": null
+  },
+  {
+    "id": "neck-harness-extension",
+    "name": "Neck Harness Extension",
+    "aliases": [
+      "Head Harness Neck Extension",
+      "Harness Neck Extension",
+      "Neck Harness Raise"
+    ],
+    "pattern": "none",
+    "loadType": "other",
+    "mechanic": "isolation",
+    "force": "push",
+    "primaryMuscle": "Neck Extensors",
+    "secondaryMuscles": [
+      "Upper Trapezius"
+    ],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "A head harness with a plate or chain hanging from it, torso braced on the thighs or a bench; extend the head against the load. EMG shows little upper-trapezius work.",
+    "sources": [
+      "https://dmoose.com/blogs/traps/neck-extension",
+      "https://www.strengthlog.com/neck-muscles-exercises-workout/",
+      "https://www.strongerbyscience.com/?p=57185",
+      "https://dmoose.com/blogs/workout-training/how-to-get-a-bigger-neck",
+      "https://bodybuilding.com/fun/weik42.htm"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
+    "id": "neck-machine-extension",
+    "name": "Neck Machine Extension",
+    "aliases": [
+      "4-Way Neck Machine Extension",
+      "Machine Neck Extension"
+    ],
+    "pattern": "none",
+    "loadType": "machine",
+    "mechanic": "isolation",
+    "force": "push",
+    "primaryMuscle": "Neck Extensors",
+    "secondaryMuscles": [
+      "Upper Trapezius"
+    ],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "A 4-way neck machine, seated facing away, the back of the head on the pad; press the head back into extension against the load.",
+    "sources": [
+      "https://lifefitness.com/en-nl/catalog/strength-training/plate-loaded/4-way-neck",
+      "https://gymequipment.co.uk/exigo-4-way-neck-machine",
+      "https://www.strongerbyscience.com/?p=57185",
+      "https://www.strengthlog.com/neck-muscles-exercises-workout/"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
+    "id": "neck-machine-flexion",
+    "name": "Neck Machine Flexion",
+    "aliases": [
+      "4-Way Neck Machine Flexion",
+      "Machine Neck Flexion",
+      "Neck Machine Forward Flexion"
+    ],
+    "pattern": "none",
+    "loadType": "machine",
+    "mechanic": "isolation",
+    "force": "pull",
+    "primaryMuscle": "Neck Flexors",
+    "secondaryMuscles": [],
+    "unilateral": false,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "A 4-way neck machine, seated facing the head pad, forehead on the pad; bring the chin toward the chest against the stack or plates.",
+    "sources": [
+      "https://lifefitness.com/en-nl/catalog/strength-training/plate-loaded/4-way-neck",
+      "https://gymequipment.co.uk/exigo-4-way-neck-machine",
+      "https://www.strengthlog.com/neck-muscles-exercises-workout/"
+    ],
+    "authored": "2026-10-24",
+    "reviewed": null
+  },
+  {
+    "id": "neck-machine-lateral-flexion",
+    "name": "Neck Machine Lateral Flexion",
+    "aliases": [
+      "4-Way Neck Machine Lateral Flexion",
+      "Machine Neck Side Bend",
+      "Neck Machine Side Flexion"
+    ],
+    "pattern": "none",
+    "loadType": "machine",
+    "mechanic": "isolation",
+    "force": "pull",
+    "primaryMuscle": "Neck Flexors",
+    "secondaryMuscles": [
+      "Neck Extensors",
+      "Upper Trapezius"
+    ],
+    "unilateral": true,
+    "strengthTracked": false,
+    "transfers": [],
+    "equipmentNotes": "A 4-way neck machine, seated side-on, the side of the head on the pad; bend the head toward the shoulder, shoulders down, no rotation; both sides.",
+    "sources": [
+      "https://lifefitness.com/en-nl/catalog/strength-training/plate-loaded/4-way-neck",
+      "https://gymequipment.co.uk/exigo-4-way-neck-machine",
+      "https://library.theprehabguys.com/vimeo-tag/head-neck/page/2/",
+      "https://www.strengthlog.com/neck-muscles-exercises-workout/"
+    ],
+    "authored": "2026-10-24",
     "reviewed": null
   },
   {

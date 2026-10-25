@@ -11,9 +11,12 @@ the open web and states its findings, then an extraction pass that turns them in
 schema. The questions name the two fields that otherwise come back empty — secondary
 muscles, and like-lift ratios.
 
-THE KEY IS NEVER IN THIS FILE, in a flag, or on screen. It is read at runtime from the
-macOS Keychain (the same item Coach stores), or from ANTHROPIC_API_KEY if you prefer to
-export it yourself. Nothing here prints it, logs it, or writes it anywhere.
+THE KEY IS NEVER IN THIS FILE, in a flag, or on screen. It is read at runtime from
+ANTHROPIC_API_KEY if exported, else from a macOS Keychain item: service "movement-library",
+account "anthropic-api-key" by default. Point it at an item you already have with
+--keychain-service / --keychain-account (or MOVEMENT_LIBRARY_KEYCHAIN_SERVICE /
+MOVEMENT_LIBRARY_KEYCHAIN_ACCOUNT). Those name the item, never the key. Nothing here prints
+the key, logs it, or writes it anywhere.
 """
 
 from __future__ import annotations
@@ -39,8 +42,8 @@ VERSION = "2023-06-01"
 RESEARCH_MODEL = "claude-sonnet-5"
 EXTRACT_MODEL = "claude-sonnet-5"
 
-KEYCHAIN_SERVICE = "com.justinherman.FitnessHub"
-KEYCHAIN_ACCOUNT = "anthropic-api-key"
+KEYCHAIN_SERVICE = os.environ.get("MOVEMENT_LIBRARY_KEYCHAIN_SERVICE", "movement-library")
+KEYCHAIN_ACCOUNT = os.environ.get("MOVEMENT_LIBRARY_KEYCHAIN_ACCOUNT", "anthropic-api-key")
 
 RESEARCH_SYSTEM = """\
 You are a strength & conditioning researcher building a reference record for one movement.
@@ -171,20 +174,20 @@ EXTRACT_SCHEMA = {
 }
 
 
-def api_key() -> str:
+def api_key(service: str = KEYCHAIN_SERVICE, account: str = KEYCHAIN_ACCOUNT) -> str:
     """From the environment if exported, else the Keychain. Never printed, never stored."""
     key = os.environ.get("ANTHROPIC_API_KEY")
     if key:
         return key.strip()
     try:
         out = subprocess.run(
-            ["security", "find-generic-password", "-s", KEYCHAIN_SERVICE,
-             "-a", KEYCHAIN_ACCOUNT, "-w"],
+            ["security", "find-generic-password", "-s", service, "-a", account, "-w"],
             capture_output=True, text=True, check=True)
         return out.stdout.strip()
     except subprocess.CalledProcessError:
         sys.exit("No API key. Export ANTHROPIC_API_KEY, or store one in the Keychain "
-                 f"(service {KEYCHAIN_SERVICE}, account {KEYCHAIN_ACCOUNT}).")
+                 f"(service {service}, account {account}; change them with "
+                 "--keychain-service / --keychain-account).")
 
 
 def call(key: str, body: dict, retries: int = 2, timeout: int = 180) -> dict:
@@ -361,6 +364,10 @@ def main() -> None:
     parser.add_argument("--only", action="append", help="author just this name (repeatable)")
     parser.add_argument("--dry-run", action="store_true", help="list what would be authored")
     parser.add_argument("--redo", action="store_true", help="re-author names already present")
+    parser.add_argument("--keychain-service", default=KEYCHAIN_SERVICE,
+                        help="Keychain item holding the API key (its name, never the key)")
+    parser.add_argument("--keychain-account", default=KEYCHAIN_ACCOUNT,
+                        help="Keychain account of that item")
     args = parser.parse_args()
 
     records = load_existing()
@@ -379,7 +386,7 @@ def main() -> None:
     if not todo:
         return
 
-    key = api_key()
+    key = api_key(args.keychain_service, args.keychain_account)
     authored = failed = 0
     for index, name in enumerate(todo, start=1):
         try:
